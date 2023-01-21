@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import './sign-up.styles.css'
+import {Link} from "react-router-dom";
 
 const SignupSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -47,6 +48,8 @@ const SignUp = () => (
                  </Form>
             )}
         </Formik>
+        <h2 className='title'>Already have an account? </h2>
+            <Link to='/sign-in'>Sign In here </Link>
     </div>
 );
 
