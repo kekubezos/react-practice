@@ -4,6 +4,7 @@ import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import {Link} from "react-router-dom";
+import formImage from '../../assets/form-image.jpg'
 
 YupPassword(Yup) //extending password functionality to yup.
 
@@ -15,35 +16,43 @@ const SignInSchema = Yup.object().shape({
 const SignIn = ()=>{
     return(
         <div className='form-box'>
-            <h1>Sign In</h1>
-            <Formik
-                initialValues={{
-                    email: '',
-                    password:''
-                }}
-                validationSchema={SignInSchema}
-                onSubmit={async (values) => {
-                    await new Promise((r) => setTimeout(r, 500));
-                    alert(JSON.stringify(values, null, 2));
-                }}
-            >
-                {({ errors, touched }) => (
-                    <Form>
-                        <Field name="email" type="email" placeholder="Email"/>
-                        {errors.email && touched.email ? <div>{errors.email}</div> : null}
+            <div className='formBox'>
+                    <h1>Sign In</h1>
+                    <Formik
+                        initialValues={{
+                            email: '',
+                            password:''
+                        }}
+                        validationSchema={SignInSchema}
+                        onSubmit={async (values) => {
+                            await new Promise((r) => setTimeout(r, 500));
+                            alert(JSON.stringify(values, null, 2));
+                        }}
+                    >
+                        {({ errors, touched }) => (
+                            <Form>
+                                <Field name="email" type="email" placeholder="Email"/>
+                                {errors.email && touched.email ? <div>{errors.email}</div> : null}
 
-                        <Field id="password" name="password" placeholder="Password" />
-                        {errors.password && touched.password ? (
-                            <div>{errors.password}</div>
-                        ) : null}
+                                <Field id="password" name="password" placeholder="Password" />
+                                {errors.password && touched.password ? (
+                                    <div>{errors.password}</div>
+                                ) : null}
 
-                        <button className="button" type="submit">Submit</button>
-                    </Form>
-                )}
-               </Formik>
-            <h2 className='title'>Do not have an account? </h2>
+                                <div className='forgot-text'>
+                                    <Link to='/forgotPassword'>Forgot Password?</Link>
+                                </div>
 
-            <Link to='/sign-up'>Sign Up here </Link>
+                                <button className="button" type="submit">Sign In</button>
+                            </Form>
+                        )}
+                       </Formik>
+                </div>
+
+                <div className='imageBox'>
+                    <img src={formImage} alt="image" width='600px' height='650px'/>
+                    <div className='image-text'>Let us guide you home. </div>
+                </div>
         </div>
     )
 }
